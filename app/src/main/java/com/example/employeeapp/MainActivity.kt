@@ -9,18 +9,26 @@ import com.example.employeeapp.viewModel.EmployeeViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: EmployeeViewModel
+//    private lateinit var viewModel: EmployeeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = EmployeeViewModel(EmployeeRepository())
-        viewModel.getEmployee()
-        viewModel.items.observe(this) {
-            it?.let {
-                Log.d("employee", "onCreate: $it")
-            }
-        }
+//        viewModel = EmployeeViewModel(EmployeeRepository())
+//        viewModel.getEmployee()
+//        viewModel.items.observe(this) {
+//            it?.let {
+//                Log.d("employee", "onCreate: $it")
+//            }
+//        }
+
+    if (savedInstanceState == null) {
+        val fragment = EmployeeFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.employee_fragment_container, fragment)
+            .commit()
+    }
+
     }
 }
