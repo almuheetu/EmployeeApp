@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.androidx.navigation.ui.feature)
     implementation(libs.androidx.navigation.ui.testing)
     implementation(libs.androidx.recyclerview)
-    implementation(libs.mediation.test.suite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

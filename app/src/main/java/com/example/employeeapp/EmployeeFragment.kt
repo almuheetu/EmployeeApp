@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.employeeapp.databinding.FragmentEmployeeListBinding
 import com.example.employeeapp.placeholder.PlaceholderContent
@@ -17,13 +16,12 @@ import com.example.employeeapp.reposatories.EmployeeDetailsRepository
 import com.example.employeeapp.reposatories.EmployeeRepository
 import com.example.employeeapp.viewModel.EmployeeDetailsViewModel
 import com.example.employeeapp.viewModel.EmployeeViewModel
-import com.google.android.ads.mediationtestsuite.viewmodels.ViewModelFactory
 
 
 class EmployeeFragment : Fragment() {
     private lateinit var binding: FragmentEmployeeListBinding
-//    private lateinit var viewModel: EmployeeViewModel
-    private lateinit var viewModel: EmployeeDetailsViewModel
+    private lateinit var viewModel: EmployeeViewModel
+//    private lateinit var viewModel: EmployeeDetailsViewModel
     private lateinit var employeeAdapter: EmployeeAdapter
 
 
@@ -42,20 +40,16 @@ class EmployeeFragment : Fragment() {
         val recyclerView: RecyclerView = binding.employeeRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-       viewModel = EmployeeDetailsViewModel(EmployeeDetailsRepository())
-        viewModel.getEmployeeDetails()
-        viewModel.items.observe(viewLifecycleOwner) { employeeResponse ->
-            if (employeeResponse != null) {
-                Log.d("EmployeeFragment", "onViewCreated: $employeeResponse")
-                employeeAdapter = EmployeeAdapter(employeeResponse)
+        viewModel = EmployeeViewModel(EmployeeRepository())
+        viewModel.getEmployee()
+        viewModel.items.observe(viewLifecycleOwner) {
+            it?.let {
+                employeeAdapter = EmployeeAdapter(it)
                 recyclerView.adapter = employeeAdapter
-            } else {
-                // Handle the case where employee details are null
-                Log.d("EmployeeFragment", "Employee details are null")
-                // Show a message to the user or a placeholder
-            }
-        }
 
+            }
+
+        }
     }
 
 }
