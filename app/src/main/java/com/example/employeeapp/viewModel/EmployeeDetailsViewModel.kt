@@ -17,15 +17,12 @@ class EmployeeDetailsViewModel(val employeeDetailsRepository: EmployeeDetailsRep
     }
     val items: LiveData<EmployeeResponseItem?> get() = _items
 
-    fun getEmployeeDetails() = viewModelScope.launch {
+    fun getEmployeeDetails(id: Int) = viewModelScope.launch {
         try {
-            _items.value = employeeDetailsRepository.getEmployeeDetails( 2)
+            _items.value = employeeDetailsRepository.getEmployeeDetails(id)
             Log.d("items", "getEmployeeDetails: $items")
 
         } catch (e: IOException) {
-            Log.d("catch", "getDivision: $e")
-            _items.value = null
-        }catch (e: Exception) {
             Log.d("catch", "getDivision: $e")
             _items.value = null
         }

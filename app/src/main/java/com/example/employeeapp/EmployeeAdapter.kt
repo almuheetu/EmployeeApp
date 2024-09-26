@@ -13,6 +13,10 @@ class EmployeeAdapter(
 ) : RecyclerView.Adapter<EmployeeAdapter.ViewHolder>() {
     class ViewHolder(var binding: AdapterEmployeeBinding) : RecyclerView.ViewHolder(binding.root)
 
+    companion object{
+        var listener: OnItemClickListener? = null
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             AdapterEmployeeBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -22,12 +26,16 @@ class EmployeeAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val employee = employeeList[position]
         viewHolder.binding.tvEmployeeName.text = employee.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.onItemClick(employee.id)
+        }
     }
 
     override fun getItemCount(): Int {
         return employeeList.size
 
     }
-
-
+    interface OnItemClickListener {
+        fun onItemClick(id: Int)
+    }
 }
