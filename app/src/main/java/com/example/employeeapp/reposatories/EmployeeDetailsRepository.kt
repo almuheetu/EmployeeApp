@@ -1,7 +1,5 @@
 package com.example.employeeapp.reposatories
 
-import com.example.employeeapp.model.EmployeeDetailsResponse
-import com.example.employeeapp.model.EmployeeResponse
 import com.example.employeeapp.model.EmployeeResponseItem
 import com.example.employeeapp.networks.ApiClient
 import com.example.employeeapp.networks.ApiInterface
